@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-xs-12 col-md-10">
+  {% for b in blocks %}
+  <div class="panel panel-default">
+     <div class="panel-heading">
+        <a href="/article/list/{{b.id}}" style="font-size: 16px">{{ b.name }}</a>
+        <span class="pull-right">{{ b.manager_name }}</span>
+      </div>
+      <div class="panel-body">
+         {{ b.desc }}
+      </div>
+  </div>
+  {% endfor %}
+</div>
+  <div class="col-xs-12 col-md-2">
+    <div class="well">个人中心</div>
+    <div class="panel-body">
+      {% if user.is_authenticated %}
+      <p>{{user.username}}.欢迎来到论坛. <a class="badge" href="/message/list/">&nbsp{{ msg_cnt }}&nbsp</a>
+      </p>
+      <br />
+      <a href="/accounts/logout">登出</a>
+      <a class="pull-right" href="/accounts/password_change">忘记密码</a>
+      {% else %}
+      <p>匿名用户，请<a href="/accounts/login">登录</a>.</p>
+      <a href="/register">还没有账户，注册一个</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
